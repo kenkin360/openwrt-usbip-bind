@@ -1,0 +1,19 @@
+
+config server
+	option enable '1'
+
+	# Set listen port
+	#option port ''
+
+	# Listen on IPv4
+	option ipv4 '1'
+
+	# Listen on IPv6
+	option ipv6 '1'
+
+config device 'bt_1'
+	option usbid '0a12:0001'
+
+config device 'bt_2'
+	option usbid '0a12:0002'
+

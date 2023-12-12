@@ -1,0 +1,10 @@
+#!/bin/sh
+
+busid="$(usbip list -p -l | grep "#usbid=$1#" | cut '-d#' -f1)"
+
+if [ ! -n "$busid" ]; then
+	return
+fi
+
+usbip bind --$busid
+sleep infinity
