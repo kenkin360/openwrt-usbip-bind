@@ -7,36 +7,30 @@ STOP=01
  
 CONFIGURATION="usbipd"
 
-unbind(){
-	config="$1"
-	config_get usbid "$config" "usbid"
+callback(){
+        config_get usbid "$1" "usbid"
 
-	busid="$(usbip list -p -l | grep "#usbid=$usbid#" | cut '-d#' -f1)"
+        busid="$(usbip list -p -l | grep "#usbid=$usbid#" | cut '-d#' -f1)"
 
-	if [ ! -n "$busid" ]; then
-		return
-	fi
+        if [ ! -n "$busid" ]; then
+                return
+        fi
 
-	usbip unbind --$busid
-}
-
-bind(){
-	config="$1"
-	config_get usbid "$config" "usbid"
-
-	procd_open_instance
-	procd_set_param command /usr/sbin/usbip-bind $usbid
-    procd_set_param stdout 1
-    procd_set_param stderr 1
-	procd_close_instance
+        usbip $2 --$busid
 }
 
 stop_service(){
 	config_load "${CONFIGURATION}"
-	config_foreach unbind device
+	config_foreach callback device unbind
 }
 
 start_service(){
-	config_load "${CONFIGURATION}"
-	config_foreach bind device
+        config_load "${CONFIGURATION}"
+        config_foreach callback device bind
+
+	procd_open_instance
+	procd_set_param command sleep infinity
+    procd_set_param stdout 1
+    procd_set_param stderr 1
+	procd_close_instance
 }
