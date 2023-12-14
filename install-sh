@@ -1,5 +1,4 @@
 cd "$(dirname $0)"
-	cp usbip-bind-conf /etc/config/usbipd
 cp usbip-bind-service /etc/init.d/usbip-bind
 cp usbip-bind /usr/sbin
 service usbip-bind enable && service usbip-bind start
