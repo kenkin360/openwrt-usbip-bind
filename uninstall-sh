@@ -1,4 +1,3 @@
 service usbip-bind stop && service usbip-bind disable
 service usbip-bind status
 rm /etc/init.d/usbip-bind
-rm /usr/sbin/usbip-bind
