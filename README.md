@@ -1,2 +1,2 @@
 # openwrt-usbip-bind
-An openwrt init script for usbip bind/unbind
+Hotplug script for usbip bind/unbind on OpenWrt
