@@ -1,5 +1,5 @@
-#service usbip-bind stop && service usbip-bind disable
-#service usbip-bind status
-#rm /etc/init.d/usbip-bind
+service usbip-bind stop && service usbip-bind disable
+service usbip-bind status
+rm /etc/init.d/usbip-bind
 
 rm /etc/hotplug.d/usb/20-usbip_bind
