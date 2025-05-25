@@ -1,4 +1,6 @@
 cd "$(dirname $0)"
-cp usbip-bind /etc/init.d
-service usbip-bind enable && service usbip-bind start
-service usbip-bind status
+#cp usbip-bind /etc/init.d
+#service usbip-bind enable && service usbip-bind start
+#service usbip-bind status
+
+cp 20-usbip_bind /etc/hotplug.d/usb

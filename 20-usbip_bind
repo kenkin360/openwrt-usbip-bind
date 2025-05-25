@@ -1,0 +1,25 @@
+callback(){
+	config_get usbid "$1" "usbid"
+	DEVICE_ID=$(printf %04x:%04x 0x${PRODUCT%%/*} 0x$(echo $PRODUCT|cut -d/ -f2))
+
+        if [ "$DEVICE_ID" != "$usbid" ]; then
+                return
+        fi
+
+	case "$ACTION" in
+		remove)
+		usbip unbind -b ${DEVICENAME}
+		logger -t hotplug "usb $usbid: removed"
+ preinit_echo "1234"
+		;;
+
+		bind)
+		usbip bind -b ${DEVICENAME}
+		logger -t hotplug "usb $usbid: bound"
+		;;
+    esac
+}
+
+CONFIGURATION="usbipd"
+config_load "${CONFIGURATION}"
+config_foreach callback device
